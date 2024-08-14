@@ -2,6 +2,7 @@ import CurrentWeather from "@/components/currentComponent";
 import FutureWeather from "@/components/futureComponent";
 import Header from "@/components/header";
 import HourlyWeather from "@/components/hourlyComponent";
+import LocationTime from "@/components/locationTimeComponent";
 import SelectCity from "@/components/selectCityComponent";
 import { getCurrentWeather } from "@/lib/currentWeather";
 import { getDailyWeather } from "@/lib/dailyWeather";
@@ -28,18 +29,7 @@ export default async function Home({
         <div className="grid grid-cols-2 gap-12 px-16">
           <div className="mt-16">
             <div className="flex gap-8 items-center">
-              <p className="text-4xl font-semibold ml-4">
-                {capitalize(city)},
-                <span className="font-normal ml-1">
-                  {String(new Date().getHours()).length === 1
-                    ? "0" + String(new Date().getHours())
-                    : String(new Date().getHours())}
-                  :
-                  {String(new Date().getMinutes()).length === 1
-                    ? "0" + String(new Date().getMinutes())
-                    : String(new Date().getMinutes())}
-                </span>
-              </p>
+              <LocationTime city={city} />
               <CurrentWeather data={currentWeather} />
             </div>
             <HourlyWeather data={hourlyWeather} />
