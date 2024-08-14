@@ -81,7 +81,11 @@ export default function FutureWeather({ data }: { data: any }) {
                       .join(":")}
                   </p>
                   <Image
-                    src={`https:${hour.condition.icon}`}
+                    src={`https:${
+                      hour.condition.icon.split("x")[0].slice(0, -2) +
+                      "128x128" +
+                      hour.condition.icon.split("x")[1].slice(2)
+                    }`}
                     width={64}
                     height={64}
                     alt="Weather icon"
@@ -123,7 +127,11 @@ export default function FutureWeather({ data }: { data: any }) {
             <div className="flex gap-12 items-center">
               <p className="text-md font-medium w-8">{getWeekdayName(index)}</p>
               <Image
-                src={`https:${day.condition.icon}`}
+                src={`https:${
+                  day.condition.icon.split("x")[0].slice(0, -2) +
+                  "128x128" +
+                  day.condition.icon.split("x")[1].slice(2)
+                }`}
                 width={64}
                 height={64}
                 alt="Weather icon"

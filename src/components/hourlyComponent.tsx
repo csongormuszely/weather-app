@@ -7,7 +7,6 @@ export default function HourlyWeather({ data }: { data: any }) {
   const relevantHours = hours
     .slice(currentHour, currentHour + 24)
     .filter((hour: any, index: number) => index % 3 === 0);
-
   return (
     <div className="mt-16 bg-slate-100 p-4 rounded-xl px-6 pb-4 pt-7">
       <h2 className="text-2xl font-semibold text-center mb-6">
@@ -65,7 +64,11 @@ export default function HourlyWeather({ data }: { data: any }) {
                     .join(":")}
                 </p>
                 <Image
-                  src={`https:${hour.condition.icon}`}
+                  src={`https:${
+                    hour.condition.icon.split("x")[0].slice(0, -2) +
+                    "128x128" +
+                    hour.condition.icon.split("x")[1].slice(2)
+                  }`}
                   width={64}
                   height={64}
                   alt="Weather icon"
