@@ -8,7 +8,7 @@ export default function HourlyWeather({ data }: { data: any }) {
     .slice(currentHour, currentHour + 24)
     .filter((hour: any, index: number) => index % 3 === 0);
   return (
-    <div className="mt-16 bg-slate-100 p-4 rounded-xl px-6 pb-4 pt-7">
+    <div className="mt-16 bg-slate-100 p-4 rounded-xl px-5 pb-4 pt-7">
       <h2 className="text-2xl font-semibold text-center mb-6">
         Hourly Forecast
       </h2>

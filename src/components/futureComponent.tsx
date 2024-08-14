@@ -13,7 +13,7 @@ export default function FutureWeather({ data }: { data: any }) {
       (hour: any, index: number) => index % 3 === 0
     );
     return (
-      <div className="bg-slate-100 rounded-xl px-8 pt-7 pb-2 relative">
+      <div className="bg-slate-100 rounded-xl px-7 pt-7 pb-2 relative">
         <div
           className="absolute top-7 left-8 cursor-pointer"
           onClick={() => setDayOpen(null)}
@@ -111,7 +111,7 @@ export default function FutureWeather({ data }: { data: any }) {
   });
   return (
     <div
-      className="bg-slate-100 rounded-xl px-8 pt-7 pb-2"
+      className="bg-slate-100 rounded-xl px-7 pt-7 pb-2"
       key={"daily_forecast_container"}
     >
       <h2 className="text-2xl font-semibold text-center mb-3">
