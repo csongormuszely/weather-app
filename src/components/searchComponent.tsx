@@ -24,7 +24,7 @@ export default function SearchComponent({
     setResults(cities);
   }
   return (
-    <form className="relative">
+    <form className="relative" onSubmit={(e) => e.preventDefault()}>
       <input
         type="text"
         placeholder="Search for a city"
@@ -34,7 +34,6 @@ export default function SearchComponent({
             : "rounded-lg text-xl py-2 px-4"
         }`}
         onChange={onType}
-        onSubmit={(e) => e.preventDefault()}
         value={query}
       />
       <div className="absolute top-12 left-0 w-full bg-slate-50 rounded-md">
