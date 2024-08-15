@@ -30,9 +30,10 @@ export default function SearchComponent({
         placeholder="Search for a city"
         className={`bg-slate-100 ${
           size === "sm"
-            ? "rounded-md text-lg py-1 px-3"
-            : "rounded-lg text-xl py-2 px-4"
-        }`}
+            ? "md:rounded-md md:text-lg md:py-1 md:px-3"
+            : "md:rounded-lg md:text-xl md:py-2 md:px-4"
+        }
+        rounded-lg text-xl py-2 px-4`}
         onChange={onType}
         value={query}
       />

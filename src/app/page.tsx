@@ -4,11 +4,10 @@ import Header from "@/components/header";
 import HourlyWeather from "@/components/hourlyComponent";
 import LocationTime from "@/components/locationTimeComponent";
 import SelectCity from "@/components/selectCityComponent";
+import ServerComponent from "@/components/serverComponent";
 import { getCurrentWeather } from "@/lib/currentWeather";
 import { getDailyWeather } from "@/lib/dailyWeather";
 import { getHourlyWeather } from "@/lib/hourlyWeather";
-import { capitalize } from "@/utils/utils";
-import Image from "next/image";
 
 export default async function Home({
   searchParams,
@@ -16,23 +15,22 @@ export default async function Home({
   searchParams: { city?: string };
 }) {
   const city = searchParams["city"] || "";
-  const currentWeather = await getCurrentWeather(city);
-  const hourlyWeather = await getHourlyWeather(city);
+
   const dailyWeather = await getDailyWeather(city);
   return (
-    <main>
+    <main className="mb-24">
       <Header />
       <div className="border-t-[1px] mx-4 border-slate-200" />
       {city === "" ? (
         <SelectCity />
       ) : (
-        <div className="grid grid-cols-2 gap-12 px-16">
-          <div className="mt-16">
-            <div className="flex gap-8 items-center">
+        <div className="grid grid-cols-1 gap-6 px-6 md:px-16 md:grid-cols-2 md:gap-12">
+          <div className="mt-12 md:mt-16">
+            <div className="flex flex-col gap-6 items-center md:gap-8 md:flex-row">
               <LocationTime city={city} />
-              <CurrentWeather data={currentWeather} />
+              <CurrentWeather city={city} />
             </div>
-            <HourlyWeather data={hourlyWeather} />
+            <HourlyWeather city={city} />
           </div>
           <div className="mt-16">
             <FutureWeather data={dailyWeather} />

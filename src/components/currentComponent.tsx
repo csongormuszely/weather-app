@@ -1,6 +1,8 @@
+import { getCurrentWeather } from "@/lib/currentWeather";
 import Image from "next/image";
 
-export default function CurrentWeather({ data }: { data: any }) {
+export default async function CurrentWeather({ city }: { city: string }) {
+  const data = await getCurrentWeather(city);
   return (
     <div className="bg-slate-100 rounded-xl inline-block px-3 py-2">
       <div className="flex items-center gap-3">

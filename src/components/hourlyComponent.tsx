@@ -1,62 +1,66 @@
+import { getHourlyWeather } from "@/lib/hourlyWeather";
 import { getHourlyData } from "@/utils/utils";
 import Image from "next/image";
 
-export default function HourlyWeather({ data }: { data: any }) {
+export default async function HourlyWeather({ city }: { city: string }) {
+  const data = await getHourlyWeather(city);
   const hours = getHourlyData(data);
   const currentHour = new Date().getHours();
   const relevantHours = hours
     .slice(currentHour, currentHour + 24)
     .filter((hour: any, index: number) => index % 3 === 0);
   return (
-    <div className="mt-16 bg-slate-100 p-4 rounded-xl px-5 pb-4 pt-7">
+    <div className="mt-16 bg-slate-100 p-4 rounded-xl px-3 pb-4 pt-7 md:px-5">
       <h2 className="text-2xl font-semibold text-center mb-6">
         Hourly Forecast
       </h2>
-      <div className="flex gap-3">
-        <div className="flex flex-col items-center justify-start gap-[2.6rem] pb-3">
+      <div className="flex gap-2 md:gap-3 relative">
+        <div className="flex flex-col items-center justify-start gap-[2.9rem] pb-3 w-20 md:bg-inherit md:gap-[2.6rem] md:w-12">
           <Image
             src="/clock.png"
             width={32}
             height={32}
             alt="Clock icon"
-            className="w-6 h-6"
+            className="w-5 h-5 md:w-6 md:h-6"
           />
           <Image
             src="/weather.png"
             width={32}
             height={32}
             alt="Clock icon"
-            className="w-8 h-8"
+            className="w-7 h-7 md:w-8 md:h-8"
           />
           <Image
             src="/temperature.png"
             width={32}
             height={32}
             alt="Clock icon"
-            className="w-8 h-8"
+            className="w-7 h-7 md:w-8 md:h-8"
           />
           <Image
             src="/drops.png"
             width={32}
             height={32}
             alt="Clock icon"
-            className="w-8 h-8"
+            className="w-7 h-7 md:w-8 md:h-8"
           />
         </div>
-        <div className="flex justify-between flex-grow">
+        <div className="flex justify-between overflow-scroll px-2 md:flex-grow md:overflow-auto">
           {relevantHours.map((hour: any, index: Number) => (
             <>
               <div
                 key={`hour_${index}`}
                 className={`border-slate-200 ${
-                  index === 0 ? "border-r-[2px]" : "border-r-[1px]"
+                  index === 0
+                    ? "border-r-[1px] md:border-r-[2px]"
+                    : "border-r-[1px]"
                 }`}
               />
               <div
                 key={hour.time_epoch}
-                className="flex flex-col items-center justify-start gap-4"
+                className="flex flex-col items-center justify-start gap-4 md:w-auto"
               >
-                <p className="text-md pb-3">
+                <p className="text-md pb-3 px-3">
                   {new Date(hour.time_epoch * 1000)
                     .toLocaleTimeString()
                     .split(":")
@@ -72,7 +76,7 @@ export default function HourlyWeather({ data }: { data: any }) {
                   width={64}
                   height={64}
                   alt="Weather icon"
-                  className="w-16 h-16"
+                  className="w-14 h-14 md:w-16 md:h-16"
                 />
                 <p className="text-2xl font-semibold py-3">
                   {Math.round(hour.temp_c)}°

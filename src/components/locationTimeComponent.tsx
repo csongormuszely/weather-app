@@ -15,7 +15,7 @@ export default function LocationTime({ city }: { city: string }) {
   }, []);
 
   return (
-    <p className="text-4xl font-semibold ml-4">
+    <p className="text-4xl font-semibold md:ml-4">
       {capitalize(city)},
       <span className="font-normal ml-1">
         {String(currentTime.getHours()).length === 1

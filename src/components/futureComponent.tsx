@@ -13,9 +13,9 @@ export default function FutureWeather({ data }: { data: any }) {
       (hour: any, index: number) => index % 3 === 0
     );
     return (
-      <div className="bg-slate-100 rounded-xl px-7 pt-7 pb-2 relative">
+      <div className="bg-slate-100 rounded-xl px-3 pt-7 pb-2 relative md:px-7">
         <div
-          className="absolute top-7 left-8 cursor-pointer"
+          className="absolute top-7 left-4 cursor-pointer md:left-8"
           onClick={() => setDayOpen(null)}
         >
           <Image
@@ -29,51 +29,53 @@ export default function FutureWeather({ data }: { data: any }) {
         <h2 className="text-2xl font-semibold text-center mb-7">
           {getWeekdayName(dayOpen, true)}
         </h2>
-        <div className="flex gap-3">
-          <div className="flex flex-col items-center justify-start gap-[2.6rem] pb-3">
+        <div className="flex gap-2 md:gap-3 relative">
+          <div className="flex flex-col items-center justify-start gap-[2.9rem] pb-3 w-20 md:bg-inherit md:gap-[2.6rem] md:w-12">
             <Image
               src="/clock.png"
               width={32}
               height={32}
               alt="Clock icon"
-              className="w-6 h-6"
+              className="w-5 h-5 md:w-6 md:h-6"
             />
             <Image
               src="/weather.png"
               width={32}
               height={32}
               alt="Clock icon"
-              className="w-8 h-8"
+              className="w-7 h-7 md:w-8 md:h-8"
             />
             <Image
               src="/temperature.png"
               width={32}
               height={32}
               alt="Clock icon"
-              className="w-8 h-8"
+              className="w-7 h-7 md:w-8 md:h-8"
             />
             <Image
               src="/drops.png"
               width={32}
               height={32}
               alt="Clock icon"
-              className="w-8 h-8"
+              className="w-7 h-7 md:w-8 md:h-8"
             />
           </div>
-          <div className="flex justify-between flex-grow">
+          <div className="flex justify-between overflow-scroll px-2 md:flex-grow md:overflow-auto">
             {relevantHours.map((hour: any, index: Number) => (
-              <React.Fragment key={`frag_${index}`}>
+              <>
                 <div
-                  key={`fut_hour_div_${index}`}
+                  key={`hour_${index}`}
                   className={`border-slate-200 ${
-                    index === 0 ? "border-r-[2px]" : "border-r-[1px]"
+                    index === 0
+                      ? "border-r-[1px] md:border-r-[2px]"
+                      : "border-r-[1px]"
                   }`}
                 />
                 <div
-                  key={`fut_${hour.time_epoch}`}
-                  className="flex flex-col items-center justify-start gap-4"
+                  key={hour.time_epoch}
+                  className="flex flex-col items-center justify-start gap-4 md:w-auto"
                 >
-                  <p className="text-md pb-3">
+                  <p className="text-md pb-3 px-3">
                     {new Date(hour.time_epoch * 1000)
                       .toLocaleTimeString()
                       .split(":")
@@ -89,7 +91,7 @@ export default function FutureWeather({ data }: { data: any }) {
                     width={64}
                     height={64}
                     alt="Weather icon"
-                    className="w-16 h-16"
+                    className="w-14 h-14 md:w-16 md:h-16"
                   />
                   <p className="text-2xl font-semibold py-3">
                     {Math.round(hour.temp_c)}°
@@ -98,7 +100,7 @@ export default function FutureWeather({ data }: { data: any }) {
                     {hour.chance_of_rain}%
                   </p>
                 </div>
-              </React.Fragment>
+              </>
             ))}
           </div>
         </div>
@@ -111,7 +113,7 @@ export default function FutureWeather({ data }: { data: any }) {
   });
   return (
     <div
-      className="bg-slate-100 rounded-xl px-7 pt-7 pb-2"
+      className="bg-slate-100 rounded-xl px-3 pt-7 pb-2 md:px-7"
       key={"daily_forecast_container"}
     >
       <h2 className="text-2xl font-semibold text-center mb-3">
@@ -121,10 +123,10 @@ export default function FutureWeather({ data }: { data: any }) {
         <React.Fragment key={`frag_${index}`}>
           <div
             key={`fut_${index}`}
-            className="flex justify-between items-center gap-4 py-1 cursor-pointer"
+            className="flex flex-col justify-between items-center gap-4 py-1 cursor-pointer md:flex-row"
             onClick={() => setDayOpen(index)}
           >
-            <div className="flex gap-12 items-center">
+            <div className="flex gap-4 justify-start items-center md:gap-12">
               <p className="text-md font-medium w-8">{getWeekdayName(index)}</p>
               <Image
                 src={`https:${
@@ -147,9 +149,20 @@ export default function FutureWeather({ data }: { data: any }) {
                 />
                 <p className="font-medium">{day.daily_chance_of_rain}%</p>
               </div>
+              <p className="text-lg block md:hidden">
+                <span className="font-semibold">
+                  {Math.round(day.maxtemp_c)}°
+                </span>{" "}
+                /{" "}
+                <span className="font-normal">
+                  {Math.round(day.mintemp_c)}°
+                </span>
+              </p>
             </div>
-            <p className="text-lg font-semibold">{day.condition.text}</p>
-            <p className="text-lg">
+            <p className="text-lg font-semibold  hidden md:block">
+              {day.condition.text}
+            </p>
+            <p className="text-lg hidden md:block">
               <span className="font-semibold">
                 {Math.round(day.maxtemp_c)}°
               </span>{" "}
