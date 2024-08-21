@@ -43,14 +43,11 @@ const getCurrentPosition = (): Promise<Position> => {
       reject(new Error("Geolocation is not supported by your browser"));
     }
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        resolve({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      },
-      (error) => reject(error)
-    );
+    navigator.geolocation.getCurrentPosition((position) => {
+      resolve({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    });
   });
 };
