@@ -62,7 +62,7 @@ export default function FutureWeather({ data }: { data: any }) {
           </div>
           <div className="flex justify-between overflow-scroll px-2 md:flex-grow md:overflow-auto">
             {relevantHours.map((hour: any, index: Number) => (
-              <>
+              <React.Fragment key={`frag_${index}`}>
                 <div
                   key={`hour_${index}`}
                   className={`border-slate-200 ${
@@ -100,7 +100,7 @@ export default function FutureWeather({ data }: { data: any }) {
                     {hour.chance_of_rain}%
                   </p>
                 </div>
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>

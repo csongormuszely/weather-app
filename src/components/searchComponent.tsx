@@ -2,7 +2,7 @@
 
 import { getCityByQuery } from "@/lib/cities";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function SearchComponent({
   size = "sm",
@@ -39,8 +39,8 @@ export default function SearchComponent({
       />
       <div className="absolute top-12 left-0 w-full bg-slate-50 rounded-md">
         {results.map((result, index) => (
-          <>
-            <Link key={result.id} href={`/?city=${result.name}`}>
+          <React.Fragment key={`frag_${result.id}`}>
+            <Link key={`link_${result.id}`} href={`/?city=${result.name}`}>
               <div
                 className={`p-2 ${size === "lg" && "text-lg"}`}
                 onClick={() => {
@@ -54,7 +54,7 @@ export default function SearchComponent({
             {index < results.length - 1 && (
               <div className="border-t-[1px] border-slate-200 mx-2" />
             )}
-          </>
+          </React.Fragment>
         ))}
       </div>
     </form>
